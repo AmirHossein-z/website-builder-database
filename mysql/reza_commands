@@ -9,23 +9,14 @@ create table category (ID int(10) primary key not null, title varchar(255) not n
 
 create table picture (name varchar(255), address varchar(255) not null, templateID int(10) not null, foreign key(templateID) references template(ID));
 
-create table wallet (ID int(10) primary key not null, inventory int(10) not null default '0', customerID int(10) not null, foreign key(customerID) references customer(ID));
+create table wallet (ID int(10) primary key not null, inventory int(100) not null default '0', customerID int(10) not null, foreign key(customerID) references customer(ID));
 
-create table employee (ID int(10) primary key not null, first_name varchar(255) not null, last_name varchar(255) not null, phone_number varchar(11) not null, national_code varchar(10) not null, email varchar(50) not null, type int(10) not null, buyID int(10) not null, foreign key (buyID) references buy(ID));
+create table employee (ID int(10) primary key not null, first_name varchar(255) not null, last_name varchar(255) not null, phone_number varchar(11) not null, national_code varchar(10) not null, email varchar(50) not null, type int(10) not null);
 
 create table transaction (ID int(10) primary key not null, date date, price int(10) not null, type int(1) not null, status int(1) not null, walletID int(10) not null, customerID int(10) not null, foreign key (walletID) references wallet(ID), foreign key (customerID) references customer(ID));
 
 ----------------
 
-insert into wallet (ID, inventory, customerID) VALUES ("1", "1010000000000", 1);
-insert into wallet (ID, inventory, , customerID) VALUES ("1", "199990000000", 2);
-insert into wallet (ID, inventory, customerID) VALUES ("1", "900000", 3);
-
-insert into employee (ID, first_name, last_name, phone_number, national_code, email, type, buyID) VALUES ("1", "Reza", "Dehghani", "09000000000", "0975421232", "hello.dehghani@gmail.com", "1", 1);
-
-insert into employee (ID, first_name, last_name, phone_number, national_code, email, type) VALUES ("1", "AmirHossein", "Zareian", "09000000000", "0974552232", "no@gmail.com", "1");
-
-insert into employee (ID, first_name, last_name, phone_number, national_code, email, type) VALUES ("1", "Ali", "Moghimi", "09000540000", "0975421232", "no@gmail.com", "2");
 
 insert into transaction (ID, date, price, type, status) VALUES ("1", "2021/02/12", 15640000, 2, 1);
 

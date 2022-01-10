@@ -36,20 +36,6 @@ values
 
 
 // وقتی میخوایم جدول مشتری رو ایجاد کنیم چرا باید subscriptionID , buyID رو هم وارد کنیم؟!
-insert into customer
-(ID,first_name,last_name,phone_number,national_number,email,subscriptionID,buyID)
-values
-(1091,"amir","mohammadi",09100000000,1111111111,"e@gmail.com",870,10);
-
-insert into customer
-(ID,first_name,last_name,phone_number,national_number,email,subscriptionID,buyID)
-values
-(989,"ali","zare",09200000000,1111111110,"aa@gmail.com",50,20);
-
-insert into customer
-(ID,first_name,last_name,phone_number,national_number,email,subscriptionID,buyID)
-values
-(651,"hossein","mosavi",09200000000,1111111111,"az@gmail.com",6,5);
 
 
 
