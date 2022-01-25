@@ -1,0 +1,63 @@
+create table employee_template (employeeID int(10), templateID int(10), foreign key (employeeID) references employee(ID), foreign key (templateID) references template(ID));
+
+create table employee_tranasaction (employeeID int(10), transactionID int(10), foreign key (employeeID) references employee(ID), foreign key (transactionID) references transaction(ID));
+
+
+create table template (ID int(10) primary key not null, name varchar(255) not null, date_create date not null, date_last_update varchar(255) ,short_description varchar(255) not null, categoryID int(10) not null, foreign key(categoryID) references category(ID));
+
+create table category (ID int(10) primary key not null, title varchar(255) not null);
+
+create table picture (name varchar(255), address varchar(255) not null, templateID int(10) not null, foreign key(templateID) references template(ID));
+
+create table wallet (ID int(10) primary key not null, inventory int(10) not null default '0', customerID int(10) not null, foreign key(customerID) references customer(ID));
+
+create table employee (ID int(10) primary key not null, first_name varchar(255) not null, last_name varchar(255) not null, phone_number varchar(11) not null, national_code varchar(10) not null, email varchar(50) not null, type int(10) not null, buyID int(10) not null, foreign key (buyID) references buy(ID));
+
+create table transaction (ID int(10) primary key not null, date date, price int(10) not null, type int(1) not null, status int(1) not null, walletID int(10) not null, customerID int(10) not null, foreign key (walletID) references wallet(ID), foreign key (customerID) references customer(ID));
+
+----------------
+
+insert into template (ID, name, date_create, date_last_update, short_description, category_id) VALUES ("1", "company template", "2022-01-09", , "این قالب شرکتی است و تمام نیاز های شرکت ها را برای داشتن یک سایت عالی برآورده می کند", "1");
+
+insert into template (ID, name, date_create, date_last_update, short_description) VALUES ("2", "personal template", "2021/12/09", "2021/01/01", "برای تمامی اشخاصی که نیازمند یک سایت شخصی حرفه ای و زیبا هستند.");
+
+insert into template (ID, name, date_create, date_last_update, short_description) VALUES ("3", "bussnuis template", "2022/01/07", "", "این قالب تجاری است و تمام نیاز های شرکت ها را برای داشتن یک سایت عالی برآورده می کند");
+
+insert into category (ID, title) VALUES ("1", "company");
+insert into category (ID, title) VALUES ("2", "personal");
+insert into category (ID, title) VALUES ("3", "bussnuis");
+
+insert into picture (name, address) VALUES ("personal", "personal.jpg");
+insert into picture (name, address) VALUES ("company", "company.jpg");
+insert into picture (name, address) VALUES ("bussnuis", "bussnuis.jpg");
+
+insert into wallet (ID, inventory) VALUES ("1", "1010000000000");
+insert into wallet (ID, inventory) VALUES ("1", "199990000000");
+insert into wallet (ID, inventory) VALUES ("1", "900000");
+
+insert into employee (ID, first_name, last_name, phone_number, national_code, email, type) VALUES ("1", "Reza", "Dehghani", "09000000000", "0975421232", "hello.dehghani@gmail.com", "1");
+
+insert into employee (ID, first_name, last_name, phone_number, national_code, email, type) VALUES ("1", "AmirHossein", "Zareian", "09000000000", "0974552232", "no@gmail.com", "1");
+
+insert into employee (ID, first_name, last_name, phone_number, national_code, email, type) VALUES ("1", "Ali", "Moghimi", "09000540000", "0975421232", "no@gmail.com", "2");
+
+insert into transaction (ID, date, price, type, status) VALUES ("1", "2021/02/12", 15640000, 2, 1);
+
+insert into transaction (ID, date, price, type, status) VALUES ("2", "2020/02/12", 15645000, 1, 3);
+
+insert into transaction (ID, date, price, type, status) VALUES ("3", "2022/02/12", 21150000, 2, 2);
+
+
+---------
+1) کوئری بنویسید که اطلاعات فیلد آدرس تمام تصاویر قالب company template را لیست کنید.
+
+select picture.address from template, picture where template.name = 'company template';
+
+2) کیف پول کاربر ۱۰۹۱ را مقدار ۱۰۰۰۰ شارژ کند.
+
+update wallet set wallet.inventory = wallet.inventory+1000000;
+
+
+4) کوئری بنویسید که پشتیبان علی مقیمی به تیکت شماره #1 پاسخ بدهد.
+insert into reply (ID, Answer, date_answered, ticketID, employeeID) values (3, 'Please, try again now with new information instrucrion on your email ali201@gmail.com', '1400-11-24', 1, 3);
+update ticket set update_date = '1400-11-24' where ticketID = 1;
